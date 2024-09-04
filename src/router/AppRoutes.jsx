@@ -7,7 +7,7 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="newnop-task/" element={<User />} />
-      <Route path="newnop-task/error" element={<Error />} />
+      <Route path="newnop-task/error/" element={<Error />} />
     </Routes>
   );
 }

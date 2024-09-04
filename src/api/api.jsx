@@ -10,7 +10,8 @@ export const getUserAPI = async (navigate) => {
     const res = await axios.get(`https://randomuser.me/api/?results=500`);
 
     // 요청이 잘못되었거나, 페이지를 찾을 수 없을 때
-    if (res.status === 400 || res.status === 404) navigate("/error");
+    if (res.status === 400 || res.status === 404)
+      navigate("/newnop-task/error/");
 
     if (res.status === 200) {
       // 요청이 성공했을 때
@@ -36,21 +37,21 @@ export const getUserAPI = async (navigate) => {
           error.response.status +
           " 잠시 후 다시 시도해 주세요."
       );
-      navigate("/error");
+      navigate("/newnop-task/error/");
     } else if (error.request) {
       // 요청이 만들어졌으나 서버로부터 응답이 없을 때
       console.error("서버 응답 없음:", error.request);
       showErrorMessage(
         "서버로부터 응답이 없습니다. 네트워크 연결을 확인하고 다시 시도해 주세요."
       );
-      navigate("/error");
+      navigate("/newnop-task/error/");
     } else {
       // 요청 설정 중 발생한 오류
       console.error("요청 설정 오류:", error.message);
       showErrorMessage(
         "요청을 처리하는 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
       );
-      navigate("/error");
+      navigate("/newnop-task/error/");
     }
   }
 };
