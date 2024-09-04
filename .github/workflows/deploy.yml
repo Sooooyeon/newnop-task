@@ -23,17 +23,11 @@ concurrency:
 jobs:
   # 단순히 배포만 수행하기에 하나의 잡으로만 구성
   deploy:
-    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-    - name: Configure Pages
-      uses: actions/configure-pages@v4
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Node
