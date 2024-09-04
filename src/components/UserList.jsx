@@ -1,12 +1,12 @@
 import React from "react";
 import UserItem from "./UserItem";
 
-export default function UserList({ filteredUsers }) {
+export default function UserList({ paginatedUsers }) {
   return (
     <div>
-      {filteredUsers && filteredUsers.length > 0 ? (
+      {paginatedUsers && paginatedUsers.length > 0 ? (
         <ul className="grid gap-x-4 gap-y-4 sm:grid-cols-2 sm:gap-y-4 xl:col-span-2">
-          {filteredUsers?.map((user, index) => (
+          {paginatedUsers?.map((user, index) => (
             <UserItem user={user} key={index} />
           ))}
         </ul>

@@ -25,18 +25,24 @@ export default function User() {
     getUserData();
   }, []);
 
+  // 검색할 이름 받기
   const handleSearchChange = (event) => {
     setSearchName(event.target.value);
     setCurrentPage(1);
   };
 
-  const filteredUsers = userList
-    .filter((user) =>
+  // 검색 함수
+  const filterUsers = (users, searchName) => {
+    return users.filter((user) =>
       `${user.name.first} ${user.name.last}`
         .toLowerCase()
         .includes(searchName.toLowerCase())
-    )
-    .sort((a, b) => {
+    );
+  };
+
+  // 정렬 함수
+  const sortUsers = (users, sortOrder) => {
+    return users.sort((a, b) => {
       const nameA = `${a.name.first} ${a.name.last}`.toLowerCase();
       const nameB = `${b.name.first} ${b.name.last}`.toLowerCase();
 
@@ -46,8 +52,13 @@ export default function User() {
         return nameB.localeCompare(nameA);
       }
     });
+  };
 
-  const paginatedUsers = filteredUsers.slice(
+  const filteredUsers = filterUsers(userList, searchName);
+  const sortedUsers = sortUsers(filteredUsers, sortOrder);
+
+  // 페이지네이션
+  const paginatedUsers = sortedUsers.slice(
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
   );
@@ -58,12 +69,13 @@ export default function User() {
     setCurrentPage(pageNumber);
     window.scrollTo(0, 0);
   };
+  //
 
   return (
     <div className="flex flex-col items-center max-w-5xl container mx-auto p-5">
       <h1
         className="text-3xl mt-10 mb-4 hover:cursor-pointer"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/newnop-task/")}
       >
         사용자 목록
       </h1>
@@ -85,7 +97,7 @@ export default function User() {
         </>
       ) : (
         <>
-          <UserList filteredUsers={paginatedUsers} />
+          <UserList paginatedUsers={paginatedUsers} />
           <Pagination
             totalPages={totalPages}
             currentPage={currentPage}

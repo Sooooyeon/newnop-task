@@ -8,7 +8,7 @@ const showErrorMessage = (message) => {
 export const getUserAPI = async (navigate) => {
   try {
     const res = await axios.get(`https://randomuser.me/api/?results=500`);
-    console.log(res);
+
     // 요청이 잘못되었거나, 페이지를 찾을 수 없을 때
     if (res.status === 400 || res.status === 404) navigate("/error");
 
